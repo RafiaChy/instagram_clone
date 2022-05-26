@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 class SignUp extends StatefulWidget {
@@ -49,18 +50,21 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
               const SizedBox(height: 24,),
-              TextFieldInput(textEditingController: _passwordController, hintText: "Enter your username...", textInputType: TextInputType.text, isPassword: true,),
+              TextFieldInput(textEditingController: _userNameController, hintText: "Enter your username...", textInputType: TextInputType.text,),
               const SizedBox(height: 24,),
               TextFieldInput(textEditingController: _emailController, hintText: "Enter your email address...", textInputType: TextInputType.emailAddress),
               const SizedBox(height: 24,),
               TextFieldInput(textEditingController: _passwordController, hintText: "Enter your password...", textInputType: TextInputType.text, isPassword: true,),
               const SizedBox(height: 24,),
-              TextFieldInput(textEditingController: _passwordController, hintText: "Enter your bio...", textInputType: TextInputType.text, isPassword: true,),
+              TextFieldInput(textEditingController: _bioController, hintText: "Enter your bio...", textInputType: TextInputType.text),
               const SizedBox(height: 24,),
               InkWell(
-                onTap: (){},
+                onTap: () async {
+                  String res = await AuthMethods().signUpTheUser(email: _emailController.text, userName: _userNameController.text, password: _passwordController.text, bio: _bioController.text);
+                  print(res);
+                } ,
                 child: Container(
-                  child: const Text("Login"),
+                  child: const Text("Sign Up"),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
