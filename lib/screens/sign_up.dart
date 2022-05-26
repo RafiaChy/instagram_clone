@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpState extends State<SignUp> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _bioController.dispose();
+    _userNameController.dispose();
     super.dispose();
   }
   @override
@@ -32,14 +36,31 @@ class _LoginScreenState extends State<LoginScreen> {
               Flexible(child: Container(), flex: 2,),
               SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor, height: 64,),
               const SizedBox(height: 64,),
+              Stack(
+                children: [
+                  const CircleAvatar(
+                    radius: 64,
+                    backgroundImage: NetworkImage("https://images.unsplash.com/photo-1653486304263-ab872c1f4997?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387"),
+                  ),
+                  Positioned(
+                    bottom: -10,
+                    left: 80,
+                    child: IconButton(onPressed: (){}, icon: const Icon(Icons.add_a_photo))),
+                ],
+              ),
+              const SizedBox(height: 24,),
+              TextFieldInput(textEditingController: _passwordController, hintText: "Enter your username...", textInputType: TextInputType.text, isPassword: true,),
+              const SizedBox(height: 24,),
               TextFieldInput(textEditingController: _emailController, hintText: "Enter your email address...", textInputType: TextInputType.emailAddress),
               const SizedBox(height: 24,),
               TextFieldInput(textEditingController: _passwordController, hintText: "Enter your password...", textInputType: TextInputType.text, isPassword: true,),
               const SizedBox(height: 24,),
+              TextFieldInput(textEditingController: _passwordController, hintText: "Enter your bio...", textInputType: TextInputType.text, isPassword: true,),
+              const SizedBox(height: 24,),
               InkWell(
                 onTap: (){},
                 child: Container(
-                  child: const Text("Log In"),
+                  child: const Text("Login"),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
@@ -58,14 +79,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("Don\'t have an account?"),
+                    child: const Text("Already have an account?"),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
 
                   GestureDetector(
                     onTap: (){},
                     child: Container(
-                      child: const Text("Sign Up", style: TextStyle(fontWeight: FontWeight.bold),),
+                      child: const Text("Log in", style: TextStyle(fontWeight: FontWeight.bold),),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
