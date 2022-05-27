@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
+  Uint8List? _image;
 
   @override
   void dispose() {
@@ -24,6 +29,28 @@ class _SignUpState extends State<SignUp> {
     _userNameController.dispose();
     super.dispose();
   }
+
+  void selectImage() async{
+   Uint8List im = await pickImage(ImageSource.gallery);
+   setState(() {
+     _image = im; 
+   });
+  }
+
+  void signUpUser() async {
+     String res = await AuthMethods().
+     signUpTheUser(email: _emailController.text, 
+     userName: _userNameController.text, 
+     password: _passwordController.text, 
+     bio: _bioController.text, 
+     file: _image!);
+    print('****$res');
+
+    if(res != 'Success!'){
+      showSnackBar(res, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +66,19 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 64,),
               Stack(
                 children: [
+                  _image != null ? 
+                   CircleAvatar(
+                    radius: 64,
+                    backgroundImage: MemoryImage(_image!),
+                  ):
                   const CircleAvatar(
                     radius: 64,
-                    backgroundImage: NetworkImage("https://images.unsplash.com/photo-1653486304263-ab872c1f4997?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387"),
+                    backgroundImage: AssetImage('assets/dp.jpg'),
                   ),
                   Positioned(
                     bottom: -10,
                     left: 80,
-                    child: IconButton(onPressed: (){}, icon: const Icon(Icons.add_a_photo))),
+                    child: IconButton(onPressed:selectImage, icon: const Icon(Icons.add_a_photo))),
                 ],
               ),
               const SizedBox(height: 24,),
@@ -56,13 +88,10 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 24,),
               TextFieldInput(textEditingController: _passwordController, hintText: "Enter your password...", textInputType: TextInputType.text, isPassword: true,),
               const SizedBox(height: 24,),
-              TextFieldInput(textEditingController: _bioController, hintText: "Enter your bio...", textInputType: TextInputType.text),
+              TextFieldInput(textEditingController: _bioController, hintText: "Enter your bio...", textInputType: TextInputType.text,),
               const SizedBox(height: 24,),
               InkWell(
-                onTap: () async {
-                  String res = await AuthMethods().signUpTheUser(email: _emailController.text, userName: _userNameController.text, password: _passwordController.text, bio: _bioController.text);
-                  print(res);
-                } ,
+                onTap: signUpUser,
                 child: Container(
                   child: const Text("Sign Up"),
                   width: double.infinity,
