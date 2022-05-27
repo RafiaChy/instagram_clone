@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,12 +14,30 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void loginUser() async{
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().loginTheUser(email: _emailController.text, password: _passwordController.text);
+
+    if(res == 'Success!'){
+
+    }
+    else{
+      showSnackBar(res, context);
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -37,9 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
               TextFieldInput(textEditingController: _passwordController, hintText: "Enter your password...", textInputType: TextInputType.text, isPassword: true,),
               const SizedBox(height: 24,),
               InkWell(
-                onTap: (){},
+                onTap: loginUser,
                 child: Container(
-                  child: const Text("Log In"),
+                  child:  isLoading? const Center(child: CircularProgressIndicator(color: primaryColor,),) :const Text("Log In"),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),

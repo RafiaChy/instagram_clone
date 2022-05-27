@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: mobileBackgroundColor, 
       ),
       //home: const ResponsiveLayoutScreen(MobileScreenLayout: MobileScreenLayout(),webScreenLayout: WebScreenLayout(),),
-      // home: LoginScreen(),
-      home: SignUp(),
+       home: LoginScreen(),
+      //home: SignUp(),
     );
   }
 }

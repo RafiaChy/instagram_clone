@@ -20,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
   Uint8List? _image;
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -34,10 +35,14 @@ class _SignUpState extends State<SignUp> {
    Uint8List im = await pickImage(ImageSource.gallery);
    setState(() {
      _image = im; 
+    
    });
   }
 
   void signUpUser() async {
+    setState(() {
+      isLoading = true;
+    });
      String res = await AuthMethods().
      signUpTheUser(email: _emailController.text, 
      userName: _userNameController.text, 
@@ -49,6 +54,10 @@ class _SignUpState extends State<SignUp> {
     if(res != 'Success!'){
       showSnackBar(res, context);
     }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -93,7 +102,7 @@ class _SignUpState extends State<SignUp> {
               InkWell(
                 onTap: signUpUser,
                 child: Container(
-                  child: const Text("Sign Up"),
+                  child: isLoading? const Center(child: CircularProgressIndicator(color: primaryColor,),) : const Text("Sign Up"),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
