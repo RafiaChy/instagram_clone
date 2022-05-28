@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/screens/sign_up.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
@@ -39,6 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
       isLoading = false;
     });
   }
+
+  void navigateToSignUp(){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUp()));
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   GestureDetector(
-                    onTap: (){},
+                    onTap: navigateToSignUp,
                     child: Container(
                       child: const Text("Sign Up", style: TextStyle(fontWeight: FontWeight.bold),),
                       padding: const EdgeInsets.symmetric(vertical: 8),
