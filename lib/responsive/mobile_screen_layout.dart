@@ -49,16 +49,17 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     pageController.dispose();
     super.dispose();
   }
-   int _page = 0;
+  int _page = 0;
 
   void navigationTap(int page){
-    pageController.jumpTo(page.toDouble());
+    
+    pageController.jumpToPage(page);
   }
 
   @override
   Widget build(BuildContext context) {
    // model.User user = Provider.of<UserProvider>(context).getUser;
-  
+   
     return Scaffold(
       body: PageView(
         children: const [
@@ -74,7 +75,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: mobileBackgroundColor,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '', backgroundColor: _page == 0? primaryColor : secondaryColor, ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '', backgroundColor: _page == 0? Colors.white : primaryColor, ),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: '', backgroundColor:  _page == 1? primaryColor : secondaryColor, ),
           BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: '', backgroundColor:  _page == 2? primaryColor : secondaryColor, ),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '', backgroundColor:  _page == 3? primaryColor : secondaryColor, ),
