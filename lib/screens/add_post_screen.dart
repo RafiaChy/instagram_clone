@@ -34,6 +34,45 @@ class _AddPostScreenState extends State<AddPostScreen> {
           ),
         ],
       ),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage('https://images.unsplash.com/photo-1654111923631-98e254cdefcf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80'),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Write a caption...',
+                    border: InputBorder.none,
+                  ),
+                  maxLines: 8,
+                ),
+              ),
+              SizedBox(
+                height: 45,
+                width: 45,
+                child: AspectRatio(
+                  aspectRatio: 487/451,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage('https://images.unsplash.com/photo-1654129072636-fa6f3b28bee7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),
+                      fit: BoxFit.fill,
+                      alignment: FractionalOffset.topCenter,
+                      )
+                    ),
+                  ),
+                  ),
+              ),
+
+            ],
+          )
+        ],
+      ),
     );
   }
 }
