@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/providers/user_provider.dart';
+import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +29,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
     String profilePhotoUrl
   ) async {
     try{
-
+      String res = await FirestoreMethods().uploadPost(_descriptionController.text, uid, _file!, username, profilePhotoUrl);
+      if(res == 'success'){
+        showSnackBar('Posted!', context);
+      }
+      else{
+        showSnackBar(res, context);
+      }
     }catch(e){
-      
+      showSnackBar(e.toString(), context);
     }
   }
   _selectImage(BuildContext context) async {
@@ -92,7 +99,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         centerTitle: false,
         actions: [
           TextButton(onPressed: () {
-            postImage();
+            postImage(user.uid, user.username, user.profilePhotoUrl);
           }, 
           child: const Text('Post', 
           style: TextStyle(color: Colors.blueAccent,
