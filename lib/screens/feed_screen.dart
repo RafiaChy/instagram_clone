@@ -12,7 +12,11 @@ class FeedScreen extends StatelessWidget {
         backgroundColor: mobileBackgroundColor,
         centerTitle: false,
         title: SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor, height: 32,),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.message_outlined))
+        ],
       ),
+      
     );
   }
 }
