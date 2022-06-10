@@ -31,7 +31,9 @@ class PostCard extends StatelessWidget {
                     Text('username', style: TextStyle(fontWeight: FontWeight.bold),)
                   ],
                 )
-                ,))
+                ,),
+                ),
+              IconButton(onPressed: (){}, icon: Icon(Icons.more_vert))
               ],
             ),
           )
