@@ -80,7 +80,7 @@ class PostCard extends StatelessWidget {
                   child: IconButton(onPressed: (){}, icon: Icon(Icons.bookmark_border_outlined),),
                   ),
 
-                  )
+               ),
             ],
           )
         ],
