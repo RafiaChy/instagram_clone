@@ -12,6 +12,7 @@ class PostCard extends StatelessWidget {
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
+        //HEADER SECTION
         children: [
           Container(
             padding: const EdgeInsets.symmetric(
@@ -55,9 +56,35 @@ class PostCard extends StatelessWidget {
                 ));
               }, icon: Icon(Icons.more_vert))
               ],
-            ),
+              
+            ),  
+          ),
+          //IMAGE SECTION
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: double.infinity,
+            child: Image.network('https://images.unsplash.com/photo-1654847129539-3ef544f24036?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+            fit: BoxFit.cover,),
+          ),
+
+          //LIKE COMMENT SHARE SECTION
+          Row(
+            children: [
+              IconButton(onPressed: (){}, icon: Icon(Icons.favorite, color: Colors.red)),
+              IconButton(onPressed: (){}, icon: Icon(Icons.comment_outlined, )),
+              IconButton(onPressed: (){}, icon: Icon(Icons.send, )),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(onPressed: (){}, icon: Icon(Icons.bookmark_border_outlined),),
+                  ),
+
+                  )
+            ],
           )
         ],
+
       ),
     );
   }
