@@ -122,7 +122,7 @@ class _PostCardState extends State<PostCard> {
               );
                 }, icon: widget.snap['likes'].contains(_user.uid)?  const Icon(Icons.favorite, color:   Colors.red ): const Icon(Icons.favorite_border))),
               IconButton(onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommentsScreen()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommentsScreen(snap: widget.snap,)));
               }, icon: Icon(Icons.comment_outlined, )),
               IconButton(onPressed: (){}, icon: Icon(Icons.send, )),
 
