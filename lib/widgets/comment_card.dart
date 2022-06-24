@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/providers/user_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CommentCard extends StatefulWidget {
-  const CommentCard({Key? key}) : super(key: key);
+  final snap;
+  const CommentCard({Key? key, this.snap}) : super(key: key);
 
   @override
   State<CommentCard> createState() => _CommentCardState();
@@ -20,7 +22,7 @@ class _CommentCardState extends State<CommentCard> {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://images.unsplash.com/photo-1655070748916-75871ab03c87?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+              widget.snap['profilePic'],
             ),
             radius: 18,
           ),
@@ -35,11 +37,11 @@ class _CommentCardState extends State<CommentCard> {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: 'username',
+                      text: widget.snap['username'],
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
-                      text: 'input description',
+                      text: '${widget.snap['text']}',
                       
                     ),
                   
@@ -47,8 +49,8 @@ class _CommentCardState extends State<CommentCard> {
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top: 4),
-                child: Text('6/15/2022',
-                style: TextStyle(fontSize: 12),),
+                child: Text(DateFormat.yMMMd().format(widget.snap['dataPublished'].toDate()),
+                style:const TextStyle(fontSize: 12),),
                 ),
               ],
             ),
