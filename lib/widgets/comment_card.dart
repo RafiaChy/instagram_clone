@@ -27,7 +27,7 @@ class _CommentCardState extends State<CommentCard> {
             radius: 18,
           ),
           Expanded(
-            child: Padding(padding: const EdgeInsets.only(left: 16,    
+            child: Padding(padding: const EdgeInsets.only(left: 17,    
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
