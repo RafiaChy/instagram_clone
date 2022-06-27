@@ -34,7 +34,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
         
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('posts').doc(widget.snap['postId']).collection('comments').snapshots(),
+        stream: FirebaseFirestore.instance.collection('posts').doc(widget.snap['postId']).
+        collection('comments').
+        orderBy('datePublished').
+        snapshots(),
         builder: (context,  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator());
