@@ -25,9 +25,7 @@ jobs:
           channel: stable
           # flutter-version: 3.0.3
           cache: true
-  
-      - name: ✨ Check Formatting
-        run: flutter format --set-exit-if-changed lib test
+
   
       # install dependencies
       - name: 📦 Install Flutter Dependencies
